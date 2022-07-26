@@ -35,7 +35,7 @@ public class Main {
                     for (int j = 0; j < W; j++) {
                         if (visited[i][j] == false && map[i][j] == 1) {
                             count++;
-                            bfs(i, j);
+                            dfs(i, j);
                         }
                     }
                 }
@@ -52,7 +52,7 @@ public class Main {
             if(newX<H && newX >=0 && newY<W && newY >=0){
                 if(visited[newX][newY] == false && map[newX][newY] == 1){
                     visited[newX][newY] = true;
-                    bfs(newX, newY);
+                    dfs(newX, newY);
                 }
             }
         }

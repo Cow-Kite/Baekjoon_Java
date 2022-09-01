@@ -1,57 +1,46 @@
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.Scanner;
- 
+import java.util.*;
+import java.io.*;
+
 public class Main {
- 
-    private static ArrayList<Integer> primes;
-    public static boolean[] primeNumcheck;
-    private static int n;
-    private static int cnt;
+    static int N, count;
+    static boolean [] prime;
     public static void main(String[] args) throws IOException {
-        Scanner sc = new Scanner(System.in);
-        n = sc.nextInt();
-        // 소수 구하기
- 
-        primeNumcheck = new boolean[n+1];
-        primes = new ArrayList<Integer>();
- 
-        primeNumcheck[0]=primeNumcheck[1]=true;
-        for(int i =2; i*i<=n; i++){
-            if(!primeNumcheck[i]){
-                for (int j = i*i; j <=n ; j += i) {
-                    primeNumcheck[j]=true;
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        N = Integer.parseInt(st.nextToken());
+
+        //소수 구하기
+        prime = new boolean[N+1];
+        prime[0] = prime[1] = true;
+
+        for (int i = 2; i*i < N+1; i++) {
+            if(!prime[i]){
+                for (int j = i*i; j < N+1; j+=i) {
+                    prime[j] = true;
                 }
             }
         }
-        for (int i = 1; i <=n ; i++) {
-            if(!primeNumcheck[i]){
-                primes.add(i);
-            }
+
+        //소수 배열 만들기
+        List<Integer> list = new ArrayList<>();
+        for (int i = 1; i <= N; i++) {
+            if(!prime[i]) list.add(i);
         }
- 
- 
+
+        //소수의 연속합
+        int hap = 0;
         int start = 0;
         int end = 0;
-        int sum = 0;
-        int count = 0;
-        while (true){
-            if(sum >= n){
-                sum -= primes.get(start++);
-            }else if(end == primes.size()){
-                break;
-            }else {
-                sum += primes.get(end++);
+        while(true){
+            if(hap >= N){
+                hap -= list.get(start++);
+            } else if(end == list.size()) break;
+            else {
+                hap += list.get(end++);
             }
-            if(n==sum){
-                count++;
-            }
+            if(hap == N) count++;
         }
- 
+
         System.out.println(count);
- 
- 
- 
- 
     }
 }

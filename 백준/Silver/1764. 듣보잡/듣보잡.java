@@ -2,36 +2,30 @@ import java.util.*;
 import java.io.*;
 
 public class Main {
+    public static void main(String[] args) throws IOException {
+        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
+        StringTokenizer st = new StringTokenizer(br.readLine());
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
-    static int n,m;
-    static String [] arr;
-    static ArrayList<String> list=new ArrayList<>();
-    public static void main(String[] args) throws IOException{
-        BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
-      
-        HashSet<String> set=new HashSet<>();
-        StringTokenizer st=new StringTokenizer(br.readLine());
-
-        n=Integer.parseInt(st.nextToken());
-        m=Integer.parseInt(st.nextToken());
-        arr=new String[m];
-        for(int i=0; i<n; i++) {
+        Set<String> set = new HashSet<>();
+        for (int i = 0; i < N; i++) {
             set.add(br.readLine());
         }
-     
-        for(int i=0; i<m; i++) {
-            arr[i]=br.readLine();
-        }
-        for(String str: arr) {
-            if(set.contains(str)) {
-                list.add(str);
+
+        ArrayList<String> result = new ArrayList<>();
+        for (int i = 0; i < M; i++) {
+            String is = br.readLine();
+            if(set.contains(is)){
+                result.add(is);
             }
         }
-        Collections.sort(list);
-        System.out.println(list.size());
-        for(String i: list) {
-            System.out.println(i);
+
+        Collections.sort(result);
+        System.out.println(result.size());
+        for(String a : result){
+            System.out.println(a);
         }
     }
-
 }
